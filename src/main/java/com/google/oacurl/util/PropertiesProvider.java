@@ -75,6 +75,10 @@ public class PropertiesProvider {
     }
   }
 
+  public boolean isFound() {
+    return this.inputStream != null;
+  }
+
   public Properties get() throws IOException {
     if (properties == null) {
       properties = new Properties();
@@ -100,4 +104,11 @@ public class PropertiesProvider {
 
     this.properties = properties;
   }
+
+public PropertiesProvider require() {
+	if (file != null && !isFound()) {
+		throw new RuntimeException("Couldn't find file: "+ file);
+	}
+	return this;
+}
 }

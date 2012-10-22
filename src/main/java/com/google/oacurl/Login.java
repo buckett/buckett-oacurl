@@ -104,9 +104,9 @@ public class Login {
     // if the file cannot be found.
     OAuthServiceProvider serviceProvider = serviceProviderDao.loadServiceProvider(
         new PropertiesProvider(serviceProviderFileName,
-            ServiceProviderDao.class, "services/").get());
+            ServiceProviderDao.class, "services/").require().get());
     OAuthConsumer consumer = consumerDao.loadConsumer(
-        new PropertiesProvider(options.getConsumerFileName()).get(), serviceProvider);
+        new PropertiesProvider(options.getConsumerFileName()).require().get(), serviceProvider);
     OAuthAccessor accessor = accessorDao.newAccessor(consumer);
 
     OAuthClient client = new OAuthClient(new HttpClient4());
